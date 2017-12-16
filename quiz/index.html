@@ -75,7 +75,14 @@
 			for (var i = 0; i<=4;i++){
 							
 				k = checkK(questions_array);
-				createQuestionForm(i,k,questions,data); 
+				if (typeof k != 'undefined') {
+						
+					createQuestionForm(i,k,questions,data); 
+				}
+				else{
+					k = checkK(questions_array);
+					createQuestionForm(i,k,questions,data); 
+				}
 			
 			}
 			
@@ -124,7 +131,9 @@
 			for (var j = 0;j<radios.length;j++){
 				
 				if (radios[j].checked) {
-					radios[j].disabled = true;
+				for(var r = 0;r<radios.length;r++){
+					radios[r].disabled = true;
+				}	
 
 					$(e.target).fadeOut('slow');
 					setTimeout(function(){
