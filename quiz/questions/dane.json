@@ -1,0 +1,22 @@
+{"questions":[ { "q1":"1970", "q2":"1969", "q3":"1972", "27" : "1968", "answer" :"1969", "question" : "Kiedy powstał internet?" },
+ { "q1":"Bill Gates", "q2":"Linus Torvalds", "q3":"Steve Jobs", "q4" : "Tim Cook", "answer" :"Linus Torvalds", "question" : "Kto stworzył Linuxa?" },
+ { "q1":"Strony internetowe", "q2":"Sieć", "q3":"Protokół", "q4" : "Usługa", "answer" :"Usługa", "question" : "Czym jest WWW" } ,
+ { "q1":"Mozilla", "q2":"Google", "q3":"Apple", "q4" : "Microsoft", "answer" :"Microsoft", "question" : "Kto opracował ActiveX" },
+ { "q1":"Miś", "q2":"Pingwin", "q3":"Lew", "q4" : "Kameleon", "answer" :"Pingwin", "question" : "Czym jest maskotka Linuxa?" } ,
+ { "q1":"J. Edgar Hoover", "q2":"Steve Jobs", "q3":"Gabe Newell", "q4" : "Bill Gates", "answer" :"Bill Gates", "question" : "Kto stworzył Windowsa??" },
+ { "q1":"Apple", "q2":"Xerox", "q3":"Suse", "q4" : "Microsoft", "answer" :"Xerox", "question" : "Która firma opracowała intefejs graficzny?" },
+ { "q1":"1085", "q2":"1983", "q3":"1084", "q4" : "1986", "answer" :"1984", "question" : "Kiedy powstał Windows?" },
+ { "q1":"1981", "q2":"1982", "q3":"1980", "q4" : "1985", "answer" :"1981", "question" : "Kiedy powstał MS - DOS?" } ,
+ { "q1":"1986", "q2":"1989", "q3":"1981", "q4" : "1985", "answer" :"1989", "question" : "Kiedy powstał HTML?" },
+ { "q1":"1995", "q2":"1996", "q3":"1993", "q4" : "1994", "answer" :"1995", "question" : "Kiedy powstał JavaScript?" },
+ { "q1":"Steve Ballmer", "q2":"Bill Gates", "q3":"Brendan Eich", "q4" : "Ari Lemmke", "answer" :"Brendan Eich", "question" : "Kto stworzył JavaScript?" },
+ { "q1":"Suse", "q2":"Sun", "q3":"Netscape", "q4" : "Google", "answer" :"Google", "question" : "Która firma stworzyła JQuery?" },
+ { "q1":"Canonical", "q2":"Mozilla", "q3":"Netscape", "q4" : "Google", "answer" :"Mozilla", "question" : "Która firma odpowiada za rozwój Firefoxa?" },
+ { "q1":"Dodaje element w wybrane miejsce", "q2":"Dodaje element na koniec", "q3":"Wyciąga element i dodaje do tablicy", "q4" : "Dodaje element na początek", "answer" :"Dodaje element na koniec", "question" : "Co robi metoda push() w JavaScript?" },
+ { "q1":"Session Hijack", "q2":"Browser Hijack", "q3":"XSS", "q4" : "MitM", "answer" :"XSS", "question" : "Jakich atakaów należy się bać stosując innerHTML?" },
+ { "q1":"XML", "q2":"JQuery", "q3":"AJAX", "q4" : "Velocity.js", "answer" :"AJAX", "question" : "Jak nazywa się technika komunikacji z serwerem, bez przeładowanie strony?" },
+ { "q1":"XML", "q2":"Bootstrap", "q3":"Framework", "q4" : "Biblioteka", "answer" :"Biblioteka", "question" : "Czym jest JQuery?" },
+ { "q1":"JavaScript", "q2":"Pascal", "q3":"PHP", "q4" : "C++", "answer" :"JavaScript", "question" : "Który z wymienionych języków działa po stronie przeglądarki?" },
+ { "q1":"JQuery", "q2":"PHP", "q3":"SQL", "q4" : "JavaScript", "answer" :"PHP", "question" : "Który język jest językiem serwerowym?" }]}
+
+

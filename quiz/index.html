@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz Dukova</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles/css.css">
+	<link href='http://fonts.googleapis.com/css?family=Aladin&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<script src="scripts/jquery-3.2.1.min.js"></script>
+
+</head>
+<body class="body_first_bg">
+<header>
+	<div class="message">
+		<h1>Hej, quiz jest na temat szeroko pojętej wiedzy informatycznej, chcesz się sprawdzić?</h1>
+		<h2>Powodzenia!</h2>
+	</div>
+</header>
+<section id='result_box'>
+	<div id="result" class="result">
+		<h2 id="result_text"></h2>
+		<h3>Kliknij w to okno, aby przeładować!</h3>
+	</div>
+</section>
+<section id="quiz">
+
+	<div id="questions" class="question">
+	
+	</div>
+</section>
+<script type="text/javascript">
+
+	const questions = document.getElementById('questions');
+	const result = document.getElementById('result');
+	var answer = [];
+	
+	var questions_array = [];
+	var points = 0;
+
+
+	var first = false;
+	var  k;
+	function checkK(array){
+		var k = Math.floor((Math.random() * 20));
+		
+		if (first === true) {
+			
+				if (array.indexOf(k) == -1) {
+					
+					array.push(k);
+					return k;
+				
+				}
+				else{
+
+					checkK(array);
+
+				}
+		}
+		else{
+			first = true;
+			array.push(k);
+			return k;
+		}
+	}
+
+
+	function getQuestions(questions,questions_array){
+		$.getJSON('questions/dane.json', function(data){ 
+			/* zmiana porównywania np na i<=9 spowoduje pojawienie się 10 pytań
+				własne pytania można dodać do pliku questions/dane.json 
+
+				#########################################################
+			you can change visible question by editing i<=4
+				*/
+			for (var i = 0; i<=4;i++){
+							
+				k = checkK(questions_array);
+				createQuestionForm(i,k,questions,data); 
+			
+			}
+			
+		});
+	}
+	function createQuestionForm(i,k, questions,data){
+
+		var container = document.createElement('div');
+		container.classList.add('form_container');
+		container.id = i;
+		var row;
+		var input;
+		var form = document.createElement('form');
+		
+		answer[i] = data.questions[k].answer;
+
+
+		for (var p in data.questions[k]){
+			if (p!='answer' && p != 'question'){
+				row = document.createElement('div');
+				row.classList.add('row');
+				label = document.createElement('label');
+				label.textContent = data.questions[k][p];
+				input = document.createElement('input');
+				input.type = 'radio';
+				input.name = 'answer' + i;
+				input.value = data.questions[k][p];
+				label.appendChild(input);
+				row.appendChild(label);
+				form.appendChild(row);
+			}
+		}
+
+		form.name = i;
+		form.action = '#';
+		var button = document.createElement('button');
+		button.textContent = "Zatwierdź odpowiedź!";
+		button.classList.add('form_button');
+		var container_divs_id = i+1;
+		
+		button.addEventListener('click',function(e){
+			e.preventDefault();
+			
+			var radios = checkAnswer(i,answer[i]);
+			var offset_array = [250,500,750,1000];
+			for (var j = 0;j<radios.length;j++){
+				
+				if (radios[j].checked) {
+					radios[j].disabled = true;
+
+					$(e.target).fadeOut('slow');
+					setTimeout(function(){
+						
+						
+    					$("html, body").animate({ scrollTop: offset_array[i] }, 500);
+						
+						
+						if (container_divs_id % 2 == 0) {
+							$('body').removeClass('body_second_bg');
+							$('body').addClass('body_first_bg');
+						}
+						else{
+							$('body').removeClass('body_first_bg');
+							$('body').addClass('body_second_bg');	
+						}
+						$('#'+container_divs_id).fadeIn('slow');	
+						container_divs_id++;
+			
+						if (container_divs_id === 6) {
+							$('#result_text').text('Zdobyłeś '+ points +' punktów!' );
+							$('#result').fadeIn('slow');
+							$('#result').click(function(){
+								location.reload();
+							});	
+						}
+						
+							
+							
+					},200);
+					
+
+				}
+			}
+			
+			
+		});
+		var question = document.createElement('h2');
+		question.textContent = data.questions[k].question;
+	
+		container.appendChild(question);
+		form.appendChild(button);
+
+		container.appendChild(form);
+		questions.appendChild(container);
+
+
+	}
+	function checkAnswer(index,answer){
+		
+		var radios = document.getElementsByName('answer'+index);
+	
+		for (var i = 0, length = radios.length; i < length; i++){
+			
+ 			if (radios[i].value === answer){
+ 				if (radios[i].checked) {
+  					points++;
+  				
+  					
+  				}
+ 			}
+		}
+		return radios;
+	}
+	getQuestions(questions,questions_array);
+
+		
+</script>
+</body>
+</html>
