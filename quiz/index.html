@@ -70,7 +70,7 @@
 				własne pytania można dodać do pliku questions/dane.json 
 
 				#########################################################
-			you can change visible question by editing i<=4
+			you can change questions quantity by editing i<=4
 				*/
 			for (var i = 0; i<=4;i++){
 							
@@ -94,6 +94,51 @@
 			
 		});
 	}
+
+
+	function animate(i,container_divs_id){
+	
+		i = i*250;
+    	$("html, body").animate({ scrollTop: i }, 500);
+	
+		if (container_divs_id % 2 == 0) {
+			$('body').removeClass('body_second_bg');
+			$('body').addClass('body_first_bg');
+		}
+		else{
+			$('body').removeClass('body_first_bg');
+			$('body').addClass('body_second_bg');	
+		}
+		$('#'+container_divs_id).fadeIn('slow');	
+		container_divs_id++;
+			
+		if (container_divs_id === 6) {
+	
+			$('#result_text').text('Zdobyłeś '+ points +' punktów!' );
+			$('#result').fadeIn('slow');
+			$('#result').click(function(){
+				location.reload();
+			});	
+		}
+	}	
+
+	function checkAnswer(index,answer){
+		
+		var radios = document.getElementsByName('answer'+index);
+	
+		for (var i = 0, length = radios.length; i < length; i++){
+			
+ 			if (radios[i].value === answer){
+ 				if (radios[i].checked) {
+  					points++;
+  				
+  					
+  				}
+ 			}
+		}
+		return radios;
+	}
+
 	function createQuestionForm(i,k, questions,data){
 
 		var container = document.createElement('div');
@@ -102,7 +147,6 @@
 		var row;
 		var input;
 		var form = document.createElement('form');
-		//błąd z deklracją
 		answer[i] = data.questions[k].answer;
 
 
@@ -133,52 +177,27 @@
 			e.preventDefault();
 			
 			var radios = checkAnswer(i,answer[i]);
-			// if you're want more questions in quiz you'll should be add more offset
-			//jeśli chcesz zwiększyć ilość wyświetlanych pytań dodaj kolejne offsety
-			var offset_array = [250,500,750,1000];
+		
+			
 			for (var j = 0;j<radios.length;j++){
 				
 				if (radios[j].checked) {
 				for(var r = 0;r<radios.length;r++){
+					
 					radios[r].disabled = true;
+				
 				}	
 
 					$(e.target).fadeOut('slow');
 					setTimeout(function(){
 						
-						
-    					$("html, body").animate({ scrollTop: offset_array[i] }, 500);
-						
-						
-						if (container_divs_id % 2 == 0) {
-							$('body').removeClass('body_second_bg');
-							$('body').addClass('body_first_bg');
-						}
-						else{
-							$('body').removeClass('body_first_bg');
-							$('body').addClass('body_second_bg');	
-						}
-						$('#'+container_divs_id).fadeIn('slow');	
-						container_divs_id++;
-			
-						if (container_divs_id === 6) {
-							$('#result_text').text('Zdobyłeś '+ points +' punktów!' );
-							$('#result').fadeIn('slow');
-							$('#result').click(function(){
-								location.reload();
-							});	
-						}
-						
-							
-							
+						animate(i+1,container_divs_id);
+	
 					},200);
-					
-
 				}
 			}
-			
-			
 		});
+
 		var question = document.createElement('h2');
 		question.textContent = data.questions[k].question;
 	
@@ -187,25 +206,8 @@
 
 		container.appendChild(form);
 		questions.appendChild(container);
-
-
 	}
-	function checkAnswer(index,answer){
-		
-		var radios = document.getElementsByName('answer'+index);
-	
-		for (var i = 0, length = radios.length; i < length; i++){
-			
- 			if (radios[i].value === answer){
- 				if (radios[i].checked) {
-  					points++;
-  				
-  					
-  				}
- 			}
-		}
-		return radios;
-	}
+
 	getQuestions(questions,questions_array);
 
 		
